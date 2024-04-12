@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Convite para Raiane</title>
+    <style>
+        /* Estilo para posicionar os botões */
+        #botoes {
+            display: flex;
+            flex-direction: column; /* Alinha os botões verticalmente */
+            align-items: center;
+            gap: 10px;
+            margin-top: 20%;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            width: 90%; /* Ajusta o tamanho do botão em dispositivos móveis */
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>RAIANE, VOCÊ ACEITA SAIR COMIGO?</h1>
+        <div id="botoes">
+            <button id="sim" onclick="abrirDialogo()">Sim</button>
+            <button id="obvio" onclick="abrirDialogo()">Óbvio</button>
+            <button id="nao" onmouseover="moverBotaoNao()">Não</button>
+        </div>
+    </div>
+
+    <script>
+        // Número de telefone para o qual a mensagem será enviada pelo WhatsApp (formato com código de país)
+        const numeroTelefone = '5541995197086'; // Seu número de telefone formatado para WhatsApp
+
+        // Função para abrir caixas de diálogo para perguntar a data e horário
+        function abrirDialogo() {
+            // Pergunta pela data
+            const data = prompt("AGR ME DIGA O DIA QUE VOCÊ DESEJA SAIR HEHE:");
+            if (data) {
+                // Pergunta pelo horário
+                const horario = prompt("AGR ME DIGA O HORÁRIO QUE VOCÊ DESEJA SAIR HEHE:");
+                if (horario) {
+                    enviarMensagemWhatsApp(data, horario);
+                }
+            }
+        }
+
+        // Função para enviar uma mensagem pelo WhatsApp
+        function enviarMensagemWhatsApp(data, horario) {
+            // Prepara a mensagem com o texto desejado
+            const mensagem = `Eu marquei nosso encontro para ${data} às ${horario}.`;
+            // Cria o link para abrir o WhatsApp com a mensagem preenchida
+            const linkWhatsApp = `https://wa.me/${numeroTelefone}?text=${encodeURIComponent(mensagem)}`;
+            // Abre uma nova aba para enviar a mensagem pelo WhatsApp
+            window.open(linkWhatsApp, '_blank');
+        }
+
+        // Função para mover o botão "não" para uma posição aleatória na tela
+        function moverBotaoNao() {
+            const nao = document.getElementById('nao');
+            const larguraTela = window.innerWidth;
+            const alturaTela = window.innerHeight;
+            const novaPosicaoX = Math.random() * (larguraTela - nao.offsetWidth);
+            const novaPosicaoY = Math.random() * (alturaTela - nao.offsetHeight);
+            
+            nao.style.position = 'absolute';
+            nao.style.left = `${novaPosicaoX}px`;
+            nao.style.top = `${novaPosicaoY}px`;
+        }
+    </script>
+</body>
+</html>
